@@ -1,24 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Stepper from "./Components/Stepper";
+import { mockData } from "./MockData";
+import Questions from "./Components/Questions";
+import Timer from "./Components/Timer";
+
+type Answer = {
+  id: number;
+  answer: string;
+};
+//for mock data. Object like get from server and used on client side
+export interface IQuestion {
+  id: number;
+  type: "single" | "multiple" | "short" | "long";
+  question: string;
+  answers?: Answer[];
+}
 
 function App() {
+  const [currentIndex, setCurrentIndex] = useState<number>(
+    Number(sessionStorage.getItem("currentIndex")) || 0
+  );
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Тестовое задание для MadSoft</h1>
+      <div className="top_test">
+        <Stepper
+          questions_size={mockData.length}
+          currentIndex={currentIndex}
+        ></Stepper>
+        <Timer minutes={20}></Timer>
+      </div>
+
+      <Questions
+        questions={mockData}
+        currentIndex={currentIndex}
+        setCurrentIndex={setCurrentIndex}
+      ></Questions>
     </div>
   );
 }

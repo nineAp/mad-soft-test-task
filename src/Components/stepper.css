@@ -1,0 +1,16 @@
+.stepper {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+}
+
+.stepper_item {
+  width: 50px;
+  height: 10px;
+  background-color: black;
+  clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+}
+
+.stepper_item.active {
+  background-color: dodgerblue;
+}
